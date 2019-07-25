@@ -7,22 +7,39 @@ import './styles/App.css';
 function App() {
   let state= {
     m_formula: '',
-    m_result: '',
+    m_result: undefined,
     m_isFormulaValid: true,
-    m_firstNum: 0,
-    m_secondNum: 0,
-    m_operand: '',
+    m_secondNum: undefined,
+    m_currentOperand: undefined,
   };
 
-  const handleResultChange= (result) => {
-    state.m_result= result;
+  const cleanUp= (result= undefined) => {
+    if (result) {
+
+    }
+
+  }
+
+  const calculateResult= () => {
+    state.m_result= (function returnResult() {
+
+      switch(state.m_operand) {
+        case '*': return
+        case '+': return
+        case '-': return
+        default: return
+      }
+    });
+
+    // make state.= state.m_result, and clean m_secondNum to be ready for the next calculation
+    cleanUp(state.m_result);
   };
 
-  const inputNumber= () => {
+  const takeInput= () => {
 
   };
 
-  const validateNumber= (inputNum, m_num) => {
+  const validateInput= (inputNum, m_num) => {
     if (!isNaN(Number(inputNum))) {
       state[m_num]= parseFloat(inputNum);
     }

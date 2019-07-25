@@ -9,7 +9,7 @@ function App() {
     m_formula: '',
     m_result: undefined,
     m_isFormulaValid: true,
-    m_secondNum: undefined,
+    m_tempNum: undefined,
     m_currentOperand: undefined,
   };
 
@@ -21,6 +21,7 @@ function App() {
   }
 
   const calculateResult= () => {
+    /*
     state.m_result= (function returnResult() {
 
       switch(state.m_operand) {
@@ -30,12 +31,13 @@ function App() {
         default: return
       }
     });
+    */
 
     // make state.= state.m_result, and clean m_secondNum to be ready for the next calculation
     cleanUp(state.m_result);
   };
 
-  const takeInput= () => {
+  const onFormulaChange= () => {
 
   };
 
@@ -50,7 +52,7 @@ function App() {
     <div id="app">
       <Calculator>
         <Display {...state}/>
-        <KeyPad/>
+        <KeyPad onFormulaChange={onFormulaChange}/>
       </Calculator>
     </div>
   );

@@ -22,12 +22,14 @@
             text-align: right;
             font-family: "Digital-7";
             font-size: 32px;
+            background-color: rgb(31, 31, 31);
+            color: white;
             padding: 0;
             margin: 0;
 
             p {
-                @include Border(2px, green);
                 margin: 0px;
+                height: 50%;
             }
         }
 

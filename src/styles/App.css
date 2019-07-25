@@ -18,12 +18,14 @@
   text-align: right;
   font-family: "Digital-7";
   font-size: 32px;
+  background-color: #1f1f1f;
+  color: white;
   padding: 0;
   margin: 0;
 }
 #app #calculator #display p {
-  border: 2px solid green;
   margin: 0px;
+  height: 50%;
 }
 #app #calculator #keypad {
   height: 320px;

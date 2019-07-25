@@ -21,6 +21,10 @@ export function Key(props) {
     clear: "AC"
   };
 
+  const handleChange= (event) => {
+    props.onFormulaChange(event.target.value);
+  };
+
   return (
     <div
       id={props.m_id}

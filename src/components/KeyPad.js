@@ -19,7 +19,7 @@ export function KeyPad(props) {
         {m_id: 'nine', m_className: 'numkey'},
         {m_id: 'equals', m_className: ''},
         {m_id: 'zero', m_className: 'numkey'},
-        {m_id: 'decimal', m_className: ''},
+        {m_id: 'decimal', m_className: 'decimal'},
     ];
     return (
         <div id='keypad'>

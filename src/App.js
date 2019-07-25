@@ -37,8 +37,8 @@ function App() {
     cleanUp(state.m_result);
   };
 
-  const onFormulaChange= () => {
-
+  const onFormulaChange= (keyPressed) => {
+    //if (state.m_currentOperand)
   };
 
   const validateInput= (inputNum, m_num) => {

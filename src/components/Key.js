@@ -24,8 +24,7 @@ export function Key(props) {
   return (
     <div
       id={props.m_id}
-      className={"key" + (props.m_className ? " " + props.m_className : "")}
-    >
+      className={"key" + (props.m_className ? " " + props.m_className : "")}>
       {LookupTable[props.m_id]}
     </div>
   );

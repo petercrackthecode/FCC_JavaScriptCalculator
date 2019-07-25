@@ -10,6 +10,10 @@ function App() {
     m_result: ''
   };
 
+  const handleResultChange= (result) => {
+    state.m_result= result;
+  };
+
   return (
     <div id="app">
       <Calculator>

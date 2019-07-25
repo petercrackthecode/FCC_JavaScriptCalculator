@@ -1,0 +1,72 @@
+#app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #b4b6cc;
+}
+#app #calculator {
+  min-width: 334px;
+  max-width: auto;
+  height: 400px;
+  display: block;
+  border: 2px solid black;
+}
+#app #calculator #display {
+  height: 80px;
+  text-align: right;
+  font-family: "Digital-7";
+  font-size: 32px;
+  padding: 0;
+  margin: 0;
+}
+#app #calculator #display p {
+  border: 2px solid green;
+  margin: 0px;
+}
+#app #calculator #keypad {
+  height: 320px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  background-color: inherit;
+}
+#app #calculator #keypad .key {
+  border: 1px solid black;
+  text-align: center;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+#app #calculator #keypad .key:not(.numkey):not(#clear):not(.operator) {
+  background-color: brown;
+}
+#app #calculator #keypad .key:hover {
+  opacity: 0.8;
+}
+#app #calculator #keypad .numkey {
+  background-color: grey;
+}
+#app #calculator #keypad #clear {
+  background-color: red;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+#app #calculator #keypad .operator {
+  background-color: #588BAE;
+}
+#app #calculator #keypad #equals {
+  grid-row-start: 4;
+  grid-row-end: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+#app #calculator #keypad #zero {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+/*# sourceMappingURL=App.css.map */

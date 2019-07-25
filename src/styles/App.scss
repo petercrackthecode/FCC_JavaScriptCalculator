@@ -1,8 +1,86 @@
+@mixin Border($thickness, $color) {
+    border: $thickness solid $color;
+}
+
 #app {
     width: 100vw;
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(180, 182, 204);
 
-    #keypad {
-        display: grid;
+    #calculator {
+        min-width: 334px;
+        max-width: auto;
+        height: 400px;
+        display: block;
+        @include Border(2px, black);
+
+        #display {
+            height: 80px;
+            text-align: right;
+            font-family: "Digital-7";
+            font-size: 32px;
+            padding: 0;
+            margin: 0;
+
+            p {
+                @include Border(2px, green);
+                margin: 0px;
+            }
+        }
+
+        #keypad {
+            height: 320px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-rows: repeat(5, 1fr);
+            background-color: inherit;
+
+            .key {
+                @include Border(1px, black);
+                text-align: center;
+                font-size: 24px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+
+                &:not(.numkey):not(#clear):not(.operator) {
+                    background-color: brown;
+                }
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+
+            .numkey {
+                background-color: grey;
+            }
+
+            #clear {
+                background-color: red;
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+
+            .operator {
+                background-color: #588BAE;
+            }
+
+            #equals {
+                grid-row-start: 4;
+                grid-row-end: 6;
+                grid-column-start: 4;
+                grid-column-end: 5;
+            }
+
+            #zero {
+                grid-column-start: 1;
+                grid-column-end: 3;
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 import React from 'react';
+import {Calculator} from './components/Calculator.js';
 import {Display} from './components/Display.js';
 import {KeyPad} from './components/KeyPad.js';
+import './styles/App.css';
 
 function App() {
   let state= {
@@ -9,9 +11,11 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Display/>
-      <KeyPad/>
+    <div id="app">
+      <Calculator>
+        <Display {...state}/>
+        <KeyPad/>
+      </Calculator>
     </div>
   );
 }

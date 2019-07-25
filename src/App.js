@@ -7,7 +7,9 @@ import './styles/App.css';
 function App() {
   let state= {
     m_formula: '',
-    m_result: ''
+    m_result: '',
+    m_isFormulaValid: true,
+    
   };
 
   const handleResultChange= (result) => {

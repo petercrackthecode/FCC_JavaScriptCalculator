@@ -52,7 +52,8 @@
                 }
 
                 &:hover {
-                    opacity: 0.8;
+                    @include Border(1px, white);
+                    color: white;
                 }
             }
 

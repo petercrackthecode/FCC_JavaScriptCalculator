@@ -45,7 +45,8 @@
   background-color: brown;
 }
 #app #calculator #keypad .key:hover {
-  opacity: 0.8;
+  border: 1px solid white;
+  color: white;
 }
 #app #calculator #keypad .numkey {
   background-color: grey;

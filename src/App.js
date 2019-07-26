@@ -6,39 +6,55 @@ import './styles/App.css';
 
 function App() {
   let state= {
-    m_result: undefined,
     m_input: '',
-    m_firstNum: undefined,
-    m_secondNum: undefined,
-    m_currentOperator: undefined,
+    m_result: 0,
+    m_output: 0,
+    m_tempNum: undefined,
+    m_operator: undefined,
   };
 
-  const cleanUp= (result= undefined) => {
-    if (result) {
-
-    }
-
+  const cleanUp= () => {
+    state.m_tempNum= undefined;
+    state.m_operator= undefined;
   }
 
   const calculateResult= () => {
-    /*
-    state.m_result= (function returnResult() {
+    const result= state.m_result;
+    const tempNum= state.m_tempNum;
+    const operator= state.operator;
+    // cleanUp before switch-case because they have return
+    cleanUp();
 
-      switch(state.m_operand) {
-        case '*': return
-        case '+': return
-        case '-': return
-        default: return
+    switch(state.m_operator) {
+      case '+': return result + tempNum;
+      case '-': return result - tempNum;
+      case '*': return result * tempNum;
+      case '/': {
+        if (tempNum === 0) {
+          state.m_output= "Error: Division by zero";
+          return 0;
+        }
+
+        return result / tempNum;
       }
-    });
-    */
-
-    // make state.= state.m_result, and clean m_secondNum to be ready for the next calculation
-    cleanUp(state.m_result);
+      default: return;
+    }
   };
 
-  const onFormulaChange= (keyPressed) => {
-    //if (state.m_currentOperand)
+
+  const onFormulaChange= (key) => {
+    switch (key) {
+      case '=': {
+        if (state.m_tempNum !== undefined) state.m_result= calculateResult();
+      }
+      case '+':
+      case '-':
+      case '*':
+      case '/': if (state.m_operator === undefined) {
+        
+      }
+      default: return;
+    }
   };
 
   const validateInput= (inputNum, m_num) => {

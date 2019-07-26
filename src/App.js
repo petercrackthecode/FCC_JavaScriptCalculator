@@ -11,13 +11,19 @@ function App() {
     m_output: 0,
     m_firstNum: undefined,
     m_secondNum: undefined,
-    m_operator: undefined,
+    m_currentOperator: undefined,
+    m_lastOperator: undefined,
   };
 
   const cleanUp= () => {
     state.m_firstNum= undefined;
     state.m_secondNum= undefined;
-    state.m_operator= undefined;
+    state.m_lastOperator= state.m_currentOperator;
+    state.m_currentOperator= undefined;
+  }
+
+  const isLastOperator= (key) => {
+    return key === state.m_lastOperator;
   }
 
   const calculateResult= (firstNum, operator, secondNum) => {
@@ -48,17 +54,16 @@ function App() {
 
   const onFormulaChange= (key) => {
     switch (key) {
-      // buggy
       case '=':
-        if (state.m_secondNum === undefined) {
-          state.m_result= calculateResult(state.m_firstNum, state.m_operator, state.m_secondNum);
-        }
-      break;
-      // buggy
       case '+':
       case '-':
       case '*':
       case '/':
+          if (!isLastOperator(key)) {
+            if (state.m_secondNum === undefined) {
+              state.m_result= calculateResult(state.m_firstNum, state.m_operator, state.m_secondNum);
+            }
+          }
         if (state.m_tempNum === undefined) {
           state.m_operator= key;
           state.m_result= parseFloat(state.m_input);

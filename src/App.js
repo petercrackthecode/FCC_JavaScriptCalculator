@@ -46,15 +46,18 @@ function App() {
 
   const onFormulaChange= (key) => {
     switch (key) {
+      // buggy
       case '=':
         if (state.m_tempNum !== undefined) state.m_result= calculateResult(state.m_result, state.m_operator, state.m_tempNum);
       break;
+      // buggy
       case '+':
       case '-':
       case '*':
       case '/':
         if (state.m_tempNum === undefined) {
           state.m_operator= key;
+          state.m_result= parseFloat(state.m_input);
         }
         else state.m_result= calculateResult(state.m_result, state.m_operator, state.tempNum);
       break;

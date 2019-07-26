@@ -9,31 +9,33 @@ function App() {
     m_input: '',
     m_result: 0,
     m_output: 0,
-    m_tempNum: undefined,
+    m_firstNum: undefined,
+    m_secondNum: undefined,
     m_operator: undefined,
   };
 
   const cleanUp= () => {
-    state.m_tempNum= undefined;
+    state.m_firstNum= undefined;
+    state.m_secondNum= undefined;
     state.m_operator= undefined;
   }
 
-  const calculateResult= (result, operator, tempNum) => {
+  const calculateResult= (firstNum, operator, secondNum) => {
     // cleanUp before switch-case because they have return
     let returnResult= 0;
 
     switch(operator) {
-      case '+': returnResult= result + tempNum;
+      case '+': returnResult= firstNum + secondNum;
       break;
-      case '-': returnResult= result - tempNum;
+      case '-': returnResult= firstNum - secondNum;
       break;
-      case '*': returnResult= result * tempNum;
+      case '*': returnResult= firstNum * secondNum;
       break;
       case '/':
-        if (tempNum === 0) {
+        if (secondNum === 0) {
           state.m_output= "Error: Division by zero";
         }
-        else returnResult= result / tempNum;
+        else returnResult= firstNum / secondNum;
       break;
       default:
       break;
@@ -48,8 +50,8 @@ function App() {
     switch (key) {
       // buggy
       case '=':
-        if (state.m_tempNum !== undefined) {
-          state.m_result= calculateResult(state.m_result, state.m_operator, state.m_tempNum);
+        if (state.m_secondNum === undefined) {
+          state.m_result= calculateResult(state.m_firstNum, state.m_operator, state.m_secondNum);
         }
       break;
       // buggy

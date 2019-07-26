@@ -6,11 +6,11 @@ import './styles/App.css';
 
 function App() {
   let state= {
-    m_formula: '',
     m_result: undefined,
-    m_isFormulaValid: true,
-    m_tempNum: undefined,
-    m_currentOperand: undefined,
+    m_input: '',
+    m_firstNum: undefined,
+    m_secondNum: undefined,
+    m_currentOperator: undefined,
   };
 
   const cleanUp= (result= undefined) => {

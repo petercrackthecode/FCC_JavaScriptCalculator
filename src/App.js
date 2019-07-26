@@ -48,7 +48,9 @@ function App() {
     switch (key) {
       // buggy
       case '=':
-        if (state.m_tempNum !== undefined) state.m_result= calculateResult(state.m_result, state.m_operator, state.m_tempNum);
+        if (state.m_tempNum !== undefined) {
+          state.m_result= calculateResult(state.m_result, state.m_operator, state.m_tempNum);
+        }
       break;
       // buggy
       case '+':

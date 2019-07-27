@@ -36,9 +36,13 @@ function App() {
         emptyFormula();
       break;
       case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
-        if (formulaLength === 0 || formulaLength === 2) state.m_formula.push(key);
-        else if (!(key === 0 && state.m_formula[formulaLength - 1].length === 0))
-          state.m_formula[formulaLength - 1]= key;
+        if (formulaLength === 0 || formulaLength === 2)
+          if (!(key === 0 && state.m_formula[formulaLength - 1].length === 0))
+            state.m_formula.push(key);
+        else
+          state.m_formula[formulaLength - 1]+= key;
+      break;
+      case '+': case '-': case '*': case '/':
       break;
       default:
       break;

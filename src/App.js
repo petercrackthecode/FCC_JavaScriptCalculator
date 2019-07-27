@@ -16,36 +16,15 @@ function App() {
   }
 
   const calculateResult= (firstNum, operator, secondNum) => {
-    // emptyFormula before switch-case because they have return
-    let returnResult= 0;
-
-    switch(operator) {
-      case '+': returnResult= firstNum + secondNum;
-      break;
-      case '-': returnResult= firstNum - secondNum;
-      break;
-      case '*': returnResult= firstNum * secondNum;
-      break;
-      case '/':
-        if (secondNum === 0) {
-          state.m_output= "Error: Division by zero";
-        }
-        else returnResult= firstNum / secondNum;
-      break;
-      default:
-      break;
-    }
-
-    emptyFormula();
-    return returnResult;
   };
 
   const onChange= (key) => {
+    const formulaLength= state.m_formulaLength;
     switch (key) {
       case '=':
-        switch (state.m_formula.length) {
+        switch (formulaLength) {
           case 3:
-            calculateResult(parseFloat(state.m_formula[0]), state.m_formula[1], parseFloat(state.m_formula[2]));
+            state.m_result= calculateResult(parseFloat(state.m_formula[0]), state.m_formula[1], parseFloat(state.m_formula[2]));
           break;
           case 2: case 1:
             state.m_result= state.m_formula[0];
@@ -56,7 +35,13 @@ function App() {
         }
         emptyFormula();
       break;
-      default: ;
+      case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+        if (formulaLength === 0 || formulaLength === 2) state.m_formula.push(key);
+        else if (!(key === 0 && state.m_formula[formulaLength - 1].length === 0))
+          state.m_formula[formulaLength - 1]= key;
+      break;
+      default:
+      break;
     }
   };
 

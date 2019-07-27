@@ -6,25 +6,18 @@ import './styles/App.css';
 
 function App() {
   let state= {
-    m_input: '',
     m_result: 0,
-    m_output: 0,
-    m_firstNum: undefined,
-    m_secondNum: undefined,
-    m_operator: undefined,
+    // m_formula has a setup order as [firstNum, operator, secondNum]
+    m_formula: [],
   };
 
-  const cleanUp= () => {
+  const emptyFormula= () => {
     state.m_firstNum= undefined;
     state.m_secondNum= undefined;
   }
 
-  const isCurrentOperator= (key) => {
-    return key === state.m_operator;
-  }
-
   const calculateResult= (firstNum, operator, secondNum) => {
-    // cleanUp before switch-case because they have return
+    // emptyFormula before switch-case because they have return
     let returnResult= 0;
 
     switch(operator) {
@@ -44,35 +37,21 @@ function App() {
       break;
     }
 
-    cleanUp();
+    emptyFormula();
     return returnResult;
   };
 
-  const onFormulaChange= (key) => {
+  const onChange= (key) => {
     switch (key) {
       case '=':
-      case '+':
-      case '-':
-      case '*':
-      case '/':
-          if (!isCurrentOperator(key)) {
-            if (state.m_secondNum === undefined) {
-              state.m_result= calculateResult(state.m_firstNum, state.m_operator, state.m_secondNum);
-            }
-          }
-        if (state.m_tempNum === undefined) {
-          state.m_operator= key;
-          state.m_result= parseFloat(state.m_input);
+        switch (state.m_formula.length) {
+          case 3: calculateResult(parseFloat(state.m_formula[0]), state.m_formula[1], parseFloat(state.m_formula[2]));
+          break;
+          case 2:
+            state.m_result= state.
+          break;
         }
-        else state.m_result= calculateResult(state.m_result, state.m_operator, state.tempNum);
       break;
-      case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
-        state.m_input+= key;
-      break;
-      case '0':
-        if (!(state.m_input[0] === '0' || state.m_input.length === 0)) state.m_input+= key;
-      break;
-      default: return;
     }
   };
 
@@ -80,7 +59,7 @@ function App() {
     <div id="app">
       <Calculator>
         <Display {...state}/>
-        <KeyPad onFormulaChange={onFormulaChange}/>
+        <KeyPad onChange={onChange}/>
       </Calculator>
     </div>
   );

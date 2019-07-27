@@ -11,19 +11,16 @@ function App() {
     m_output: 0,
     m_firstNum: undefined,
     m_secondNum: undefined,
-    m_currentOperator: undefined,
-    m_lastOperator: undefined,
+    m_operator: undefined,
   };
 
   const cleanUp= () => {
     state.m_firstNum= undefined;
     state.m_secondNum= undefined;
-    state.m_lastOperator= state.m_currentOperator;
-    state.m_currentOperator= undefined;
   }
 
-  const isLastOperator= (key) => {
-    return key === state.m_lastOperator;
+  const isCurrentOperator= (key) => {
+    return key === state.m_operator;
   }
 
   const calculateResult= (firstNum, operator, secondNum) => {
@@ -51,7 +48,6 @@ function App() {
     return returnResult;
   };
 
-
   const onFormulaChange= (key) => {
     switch (key) {
       case '=':
@@ -59,7 +55,7 @@ function App() {
       case '-':
       case '*':
       case '/':
-          if (!isLastOperator(key)) {
+          if (!isCurrentOperator(key)) {
             if (state.m_secondNum === undefined) {
               state.m_result= calculateResult(state.m_firstNum, state.m_operator, state.m_secondNum);
             }
@@ -78,13 +74,6 @@ function App() {
       break;
       default: return;
     }
-  };
-
-  const validateInput= (inputNum, m_num) => {
-    if (!isNaN(Number(inputNum))) {
-      state[m_num]= parseFloat(inputNum);
-    }
-    else state.m_isFormulaValid= false;
   };
 
   return (

@@ -12,8 +12,7 @@ function App() {
   };
 
   const emptyFormula= () => {
-    state.m_firstNum= undefined;
-    state.m_secondNum= undefined;
+    state.m_formula= [];
   }
 
   const calculateResult= (firstNum, operator, secondNum) => {
@@ -45,13 +44,19 @@ function App() {
     switch (key) {
       case '=':
         switch (state.m_formula.length) {
-          case 3: calculateResult(parseFloat(state.m_formula[0]), state.m_formula[1], parseFloat(state.m_formula[2]));
+          case 3:
+            calculateResult(parseFloat(state.m_formula[0]), state.m_formula[1], parseFloat(state.m_formula[2]));
           break;
-          case 2:
-            state.m_result= state.
+          case 2: case 1:
+            state.m_result= state.m_formula[0];
+          break;
+          case 0:
+          default:
           break;
         }
+        emptyFormula();
       break;
+      default: ;
     }
   };
 

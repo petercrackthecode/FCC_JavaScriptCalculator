@@ -16,7 +16,26 @@ function App() {
     state.m_formula= [];
   }
 
+  // you must check for division by zero here
   const calculateResult= (firstNum, operator, secondNum) => {
+    let result= state.m_result;
+
+    switch (operator) {
+      case '+': result= firstNum + secondNum;
+      break;
+      case '-': result= firstNum - secondNum;
+      break;
+      case '*': result= firstNum * secondNum;
+      break;
+      case '/':
+        if (!secondNum) state.m_isDivisionByZero= true;
+        else result= firstNum / secondNum;
+      break;
+      default:
+      break;
+    }
+
+    return result;
   };
 
   const onChange= (key) => {

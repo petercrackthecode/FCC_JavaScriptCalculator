@@ -9,6 +9,7 @@ function App() {
     m_result: 0,
     // m_formula has a setup order as [firstNum, operator, secondNum]
     m_formula: [],
+    m_isDivisionByZero: false,
   };
 
   const emptyFormula= () => {
@@ -21,6 +22,7 @@ function App() {
   const onChange= (key) => {
     const formulaLength= state.m_formulaLength;
     switch (key) {
+      // every time an user presses '=' immediately show the result
       case '=':
         switch (formulaLength) {
           case 3:

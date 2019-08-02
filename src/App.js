@@ -81,9 +81,9 @@ class App extends React.Component {
       break;
       case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
         if (formulaLength === 0 || formulaLength === 2) {
-          if (!(key === 0 && this.state.m_formula[formulaLength - 1].length === 0))
+          if (!(key === '0' && !this.state.m_formula[formulaLength - 1]))
             this.setState({m_formula: this.state.m_formula.concat(key)});
-        }
+        } // formulaLength= 1 || 3
         else {
           let newFormula= this.state.m_formula;
           newFormula[formulaLength - 1]+= key;

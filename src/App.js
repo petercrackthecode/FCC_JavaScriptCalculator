@@ -1,5 +1,5 @@
 import React from "react";
-import {Calculator} from './components/Calculator.js';
+import { Calculator } from "./components/Calculator.js";
 import { Display } from "./components/Display.js";
 import { KeyPad } from "./components/KeyPad.js";
 import "./styles/App.css";
@@ -144,15 +144,17 @@ class App extends React.Component {
             break;
         }
         break;
+      /*
       case '.':
         if (formulaLength === 0 || formulaLength === 2) {
           let newFormula= this.state.m_formula.concat(key);
           this.setState({m_formula: newFormula});
         }
-        else {
-          
+        else if (this.state.m_formula[formulaLength].search) {
+
         }
       break;
+      */
       case "AC":
         this.clearAll();
         break;

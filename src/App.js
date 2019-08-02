@@ -55,72 +55,105 @@ class App extends React.Component {
   //   console.log("state.m_result= " + this.state.m_result);
   // }
 
-  onChange= (key) => {
-    const formulaLength= this.state.m_formula.length;
-    const firstNum= this.state.m_formula[0];
-    const operator= this.state.m_formula[1];
-    const secondNum= this.state.m_formula[2];
+  onChange = key => {
+    const formulaLength = this.state.m_formula.length;
+    const firstNum = this.state.m_formula[0];
+    const operator = this.state.m_formula[1];
+    const secondNum = this.state.m_formula[2];
 
     switch (key) {
       // every time an user presses '=' immediately show the result
-      case '=':
+      case "=":
         switch (formulaLength) {
           case 3:
             this.setState({
-              m_result: this.calculateResult(Number(firstNum), operator, Number(secondNum))
+              m_result: this.calculateResult(
+                Number(firstNum),
+                operator,
+                Number(secondNum)
+              )
             });
-          break;
-          case 2: case 1:
-            this.setState({m_result: Number(firstNum)});
-          break;
+            break;
+          case 2:
+          case 1:
+            this.setState({ m_result: Number(firstNum) });
+            break;
           case 0:
           default:
-          break;
+            break;
         }
         this.emptyFormula();
-      break;
-      case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
+        break;
+      case "0":
+      case "1":
+      case "2":
+      case "3":
+      case "4":
+      case "5":
+      case "6":
+      case "7":
+      case "8":
+      case "9":
         if (formulaLength === 0 || formulaLength === 2) {
-          if (!(key === '0' && !this.state.m_formula[formulaLength - 1]))
-            this.setState({m_formula: this.state.m_formula.concat(key)});
+          if (!(key === "0" && !this.state.m_formula[formulaLength - 1]))
+            this.setState(prevState => ({
+              m_formula: prevState.m_formula.concat(key)
+            }));
         } // formulaLength= 1 || 3
         else {
-          let newFormula= this.state.m_formula;
-          newFormula[formulaLength - 1]+= key;
-          this.setState({m_formula: newFormula});
+          let newFormula = this.state.m_formula;
+          newFormula[formulaLength - 1] += key;
+          this.setState({ m_formula: newFormula });
         }
-      break;
-      case '+': case '-': case '*': case '/':
+        break;
+      case "+":
+      case "-":
+      case "*":
+      case "/":
         switch (formulaLength) {
           case 0:
-            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result)});
-          break;
-          case 1: case 2:
-            let newFormula= this.state.m_formula;
-            newFormula[1]= key;
-            this.setState({m_formula: newFormula});
-          break;
+            this.setState(prevState => ({
+              m_formula: prevState.m_formula.concat(
+                prevState.m_result.toString()
+              )
+            }));
+            break;
+          case 1:
+          case 2:
+            let newFormula = this.state.m_formula;
+            newFormula[1] = key;
+            this.setState({ m_formula: newFormula });
+            break;
           case 3:
             this.setState({
-              m_result: this.calculateResult(Number(firstNum), operator, Number(secondNum))
+              m_result: this.calculateResult(
+                Number(firstNum),
+                operator,
+                Number(secondNum)
+              )
             });
             this.emptyFormula();
-            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result.toString(), key)});
-          break;
+            this.setState(prevState => ({
+              m_formula: prevState.m_formula.concat(
+                prevState.m_result.toString(),
+                key
+              )
+            }));
+            break;
           default:
-          break;
+            break;
         }
-      break;
-      case 'AC':
+        break;
+      case "AC":
         this.clearAll();
-      break;
+        break;
       default:
-      break;
+        break;
     }
 
     // there must be something wrong here
     console.log("formula Length in App.js= " + this.state.m_formula.length);
-  }
+  };
 
   render() {
     return (

@@ -1,12 +1,12 @@
 import React from 'react';
-import {Calculator} from './components/Calculator.js';
+// import {Calculator} from './components/Calculator.js';
 import {Display} from './components/Display.js';
 import {KeyPad} from './components/KeyPad.js';
 import './styles/App.css';
 
 function App() {
   let state= {
-    m_result: 0,
+    m_result: 12,
     // m_formula has a setup order as [firstNum, operator, secondNum]
     m_formula: [],
     m_isDivisionByZero: false,
@@ -43,6 +43,13 @@ function App() {
     return result;
   };
 
+  const onChange= (key) => {
+    console.log("onChange activates on " + key);
+    state.m_result= key;
+    console.log("state.m_result= " + state.m_result);
+  }
+
+  /*
   const onChange= (key) => {
     const formulaLength= state.m_formulaLength;
     switch (key) {
@@ -92,13 +99,14 @@ function App() {
       break;
     }
   };
+  */
 
   return (
     <div id="app">
-      <Calculator>
-        <Display {...state}/>
+      <div id='calculator'>
+        <Display m_result={state.m_result}/>
         <KeyPad onChange={onChange}/>
-      </Calculator>
+      </div>
     </div>
   );
 }

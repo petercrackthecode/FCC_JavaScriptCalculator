@@ -22,7 +22,9 @@ export function Key(props) {
   };
 
   const handleChange= (event) => {
-    props.onChange(event.target.value);
+    console.log("Hi, I'm " + event.target.innerHTML);
+    console.log(event.target);
+    props.onChange(event.target.innerHTML);
   };
 
   return (

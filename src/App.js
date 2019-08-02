@@ -1,57 +1,59 @@
-import React from 'react';
+import React from "react";
 // import {Calculator} from './components/Calculator.js';
-import {Display} from './components/Display.js';
-import {KeyPad} from './components/KeyPad.js';
-import './styles/App.css';
+import { Display } from "./components/Display.js";
+import { KeyPad } from "./components/KeyPad.js";
+import "./styles/App.css";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state= {
-      m_result: 12,
+    this.state = {
+      m_result: 0,
       // m_formula has a setup order as [firstNum, operator, secondNum]
       m_formula: [],
-      m_isDivisionByZero: false,
+      m_isDivisionByZero: false
     };
   }
 
+  emptyFormula = () => {
+    this.setState({ m_formula: [] });
+  };
 
-  emptyFormula= () => {
-    this.setState({m_formula: []});
-  }
-
-  clearAll= () => {
+  clearAll = () => {
     this.emptyFormula();
-    this.setState({m_result: 0});
-  }
+    this.setState({ m_result: 0 });
+  };
 
   // you must check for division by zero here
-  calculateResult= (firstNum, operator, secondNum) => {
-    let result= this.state.m_result;
+  calculateResult = (firstNum, operator, secondNum) => {
+    let result = this.state.m_result;
 
     switch (operator) {
-      case '+': result= firstNum + secondNum;
-      break;
-      case '-': result= firstNum - secondNum;
-      break;
-      case '*': result= firstNum * secondNum;
-      break;
-      case '/':
-        if (!secondNum) this.setState({m_isDivisionByZero: true});
-        else result= firstNum / secondNum;
-      break;
+      case "+":
+        result = firstNum + secondNum;
+        break;
+      case "-":
+        result = firstNum - secondNum;
+        break;
+      case "*":
+        result = firstNum * secondNum;
+        break;
+      case "/":
+        if (!secondNum) this.setState({ m_isDivisionByZero: true });
+        else result = firstNum / secondNum;
+        break;
       default:
-      break;
+        break;
     }
 
     return result;
   };
 
-  onChange= (key) => {
-    console.log("onChange activates on " + key);
-    this.setState({m_result: key});
-    console.log("state.m_result= " + this.state.m_result);
-  }
+  // onChange= (key) => {
+  //   console.log("onChange activates on " + key);
+  //   this.setState({m_result: key});
+  //   console.log("state.m_result= " + this.state.m_result);
+  // }
 
   onChange= (key) => {
     const formulaLength= this.state.m_formulaLength;
@@ -118,9 +120,9 @@ class App extends React.Component {
   render() {
     return (
       <div id="app">
-        <div id='calculator'>
-          <Display m_result={this.state.m_result}/>
-          <KeyPad onChange={this.onChange}/>
+        <div id="calculator">
+          <Display {...this.state} />
+          <KeyPad onChange={this.onChange} />
         </div>
       </div>
     );

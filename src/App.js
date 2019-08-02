@@ -14,7 +14,12 @@ function App() {
 
   const emptyFormula= () => {
     state.m_formula= [];
-  }
+  };
+
+  const clearAll= () => {
+    emptyFormula();
+    state.m_result= 0;
+  };
 
   // you must check for division by zero here
   const calculateResult= (firstNum, operator, secondNum) => {
@@ -64,6 +69,24 @@ function App() {
           state.m_formula[formulaLength - 1]+= key;
       break;
       case '+': case '-': case '*': case '/':
+        switch (formulaLength) {
+          case 0:
+            state.m_formula.push(state.m_result);
+          break;
+          case 1: case 2:
+          break;
+          case 3:
+            state.m_result= calculateResult(Number(state.m_formula[0]), state.m_formula[1], Number(state.m_formula[2]));
+            emptyFormula();
+            state.m_formula.push(state.m_result);
+          break;
+          default:
+          break;
+        }
+        state.m_formula.push(key);
+      break;
+      case 'AC':
+        clearAll();
       break;
       default:
       break;

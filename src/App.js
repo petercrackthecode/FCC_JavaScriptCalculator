@@ -56,7 +56,8 @@ class App extends React.Component {
   // }
 
   onChange= (key) => {
-    const formulaLength= this.state.m_formulaLength;
+    const formulaLength= this.state.m_formula.length;
+    console.log(formulaLength);
     const firstNum= this.state.m_formula[0];
     const operator= this.state.m_formula[1];
     const secondNum= this.state.m_formula[2];
@@ -93,7 +94,7 @@ class App extends React.Component {
       case '+': case '-': case '*': case '/':
         switch (formulaLength) {
           case 0:
-            this.setState({m_formula: this.state.formula.concat(this.state.m_result)});
+            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result)});
           break;
           case 1: case 2:
           break;

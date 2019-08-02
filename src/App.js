@@ -1,5 +1,5 @@
 import React from "react";
-// import {Calculator} from './components/Calculator.js';
+import {Calculator} from './components/Calculator.js';
 import { Display } from "./components/Display.js";
 import { KeyPad } from "./components/KeyPad.js";
 import "./styles/App.css";
@@ -144,6 +144,15 @@ class App extends React.Component {
             break;
         }
         break;
+      case '.':
+        if (formulaLength === 0 || formulaLength === 2) {
+          let newFormula= this.state.m_formula.concat(key);
+          this.setState({m_formula: newFormula});
+        }
+        else {
+          
+        }
+      break;
       case "AC":
         this.clearAll();
         break;
@@ -158,10 +167,10 @@ class App extends React.Component {
   render() {
     return (
       <div id="app">
-        <div id="calculator">
+        <Calculator>
           <Display {...this.state} />
           <KeyPad onChange={this.onChange} />
-        </div>
+        </Calculator>
       </div>
     );
   }

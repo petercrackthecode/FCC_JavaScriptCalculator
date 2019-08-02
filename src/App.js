@@ -71,7 +71,7 @@ class App extends React.Component {
             });
           break;
           case 2: case 1:
-            this.setState({m_result: firstNum});
+            this.setState({m_result: Number(firstNum)});
           break;
           case 0:
           default:
@@ -96,18 +96,20 @@ class App extends React.Component {
             this.setState({m_formula: this.state.m_formula.concat(this.state.m_result)});
           break;
           case 1: case 2:
+            let newFormula= this.state.m_formula;
+            newFormula[1]= key;
+            this.setState({m_formula: newFormula});
           break;
           case 3:
             this.setState({
               m_result: this.calculateResult(Number(firstNum), operator, Number(secondNum))
             });
             this.emptyFormula();
-            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result)});
+            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result.toString(), key)});
           break;
           default:
           break;
         }
-        this.setState({m_formula: this.state.m_formula.concat(key)});
       break;
       case 'AC':
         this.clearAll();

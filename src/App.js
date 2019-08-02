@@ -55,6 +55,9 @@ class App extends React.Component {
 
   onChange= (key) => {
     const formulaLength= this.state.m_formulaLength;
+    const firstNum= this.state.m_formula[0];
+    const operator= this.state.m_formula[1];
+    const secondNum= this.state.m_formula[2];
 
     switch (key) {
       // every time an user presses '=' immediately show the result
@@ -62,11 +65,11 @@ class App extends React.Component {
         switch (formulaLength) {
           case 3:
             this.setState({
-              m_result: this.calculateResult(parseFloat(this.state.m_formula[0]), this.state.m_formula[1], parseFloat(this.state.m_formula[2]))
+              m_result: this.calculateResult(Number(firstNum), operator, Number(secondNum))
             });
           break;
           case 2: case 1:
-            this.setState({m_result: this.state.m_formula[0]});
+            this.setState({m_result: firstNum});
           break;
           case 0:
           default:
@@ -79,32 +82,30 @@ class App extends React.Component {
           if (!(key === 0 && this.state.m_formula[formulaLength - 1].length === 0)) {
             this.setState({m_formula: this.state.m_formula.concat(key)});
           }
-        else
-          currentFormula[formulaLength - 1]+= key;
-
-        this.setState({m_formula: currentFormula});
+        else {
+          let newFormula= this.state.m_formula;
+          newFormula[formulaLength - 1]+= key;
+          this.setState({m_formula: newFormula});
+        }
       break;
       case '+': case '-': case '*': case '/':
         switch (formulaLength) {
           case 0:
-            currentFormula.push(this.state.m_result);
-            this.setState({m_formula: currnetFormula});
+            this.setState({m_formula: this.state.formula.concat(this.state.m_result)});
           break;
           case 1: case 2:
           break;
           case 3:
             this.setState({
-              m_result: this.calculateResult(Number(this.state.m_formula[0]), this.state.m_formula[1], Number(this.state.m_formula[2]))
+              m_result: this.calculateResult(Number(firstNum), operator, Number(secondNum))
             });
             this.emptyFormula();
-            currentFormula= [];
-            currentFormula.push(this.state.m_result);
-            this.setState({m_formula: currentFormula});
+            this.setState({m_formula: this.state.m_formula.concat(this.state.m_result)});
           break;
           default:
           break;
         }
-        state.m_formula.push(key);
+        this.setState({m_formula: this.state.m_formula.concat(key)});
       break;
       case 'AC':
         this.clearAll();

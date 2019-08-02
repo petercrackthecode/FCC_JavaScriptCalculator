@@ -57,7 +57,6 @@ class App extends React.Component {
 
   onChange= (key) => {
     const formulaLength= this.state.m_formula.length;
-    console.log(formulaLength);
     const firstNum= this.state.m_formula[0];
     const operator= this.state.m_formula[1];
     const secondNum= this.state.m_formula[2];
@@ -81,10 +80,10 @@ class App extends React.Component {
         this.emptyFormula();
       break;
       case '0': case '1': case '2': case '3': case '4': case '5': case '6': case '7': case '8': case '9':
-        if (formulaLength === 0 || formulaLength === 2)
-          if (!(key === 0 && this.state.m_formula[formulaLength - 1].length === 0)) {
+        if (formulaLength === 0 || formulaLength === 2) {
+          if (!(key === 0 && this.state.m_formula[formulaLength - 1].length === 0))
             this.setState({m_formula: this.state.m_formula.concat(key)});
-          }
+        }
         else {
           let newFormula= this.state.m_formula;
           newFormula[formulaLength - 1]+= key;
@@ -116,6 +115,9 @@ class App extends React.Component {
       default:
       break;
     }
+
+    // there must be something wrong here
+    console.log("formula Length in App.js= " + this.state.m_formula.length);
   }
 
   render() {

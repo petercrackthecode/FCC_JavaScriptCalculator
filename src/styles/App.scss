@@ -37,6 +37,7 @@
             background-color: inherit;
 
             .key {
+                user-select: none;
                 @include Border(1px, black);
                 text-align: center;
                 font-size: 24px;

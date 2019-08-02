@@ -32,6 +32,7 @@
   background-color: inherit;
 }
 #app #calculator #keypad .key {
+  user-select: none;
   border: 1px solid black;
   text-align: center;
   font-size: 24px;

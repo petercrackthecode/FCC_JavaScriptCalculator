@@ -26,7 +26,7 @@ export function KeyPad(props) {
             {keyList.map(key => <Key
                                  m_id={key.m_id}
                                  m_className={key.m_className}
-                                 onFormulaChange={props.onFormulaChange}
+                                 onChange={props.onChange}
                                  />)}
         </div>
     );

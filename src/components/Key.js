@@ -22,13 +22,14 @@ export function Key(props) {
   };
 
   const handleChange= (event) => {
-    props.onFormulaChange(event.target.value);
+    props.onChange(event.target.value);
   };
 
   return (
     <div
       id={props.m_id}
-      className={"key" + (props.m_className ? " " + props.m_className : "")}>
+      className={"key" + (props.m_className ? " " + props.m_className : "")}
+      onClick={handleChange}>
       {LookupTable[props.m_id]}
     </div>
   );

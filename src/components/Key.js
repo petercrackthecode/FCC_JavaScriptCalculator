@@ -22,8 +22,6 @@ export function Key(props) {
   };
 
   const handleChange= (event) => {
-    console.log("Hi, I'm " + event.target.innerHTML);
-    console.log(event.target);
     props.onChange(event.target.innerHTML);
   };
 

@@ -127,18 +127,22 @@ class App extends React.Component {
             }));
             break;
           case 1:
-            let newFormula = this.state.m_formula;
-            newFormula[1] = key;
-            await this.setState({ m_formula: newFormula });
+            let tempFormula = this.state.m_formula;
+            tempFormula[1] = key;
+            await this.setState({ m_formula: tempFormula });
             break;
           case 2:
-            if (key === "+" || key === "-") {
-              let newFormula= this.state.m_formula;
+            let newFormula = this.state.m_formula;
+            if (
+              (key === "+" || key === "-") &&
+              (newFormula[formulaLength - 1] !== "+" &&
+                newFormula[formulaLength - 1] !== "-")
+            ) {
               newFormula.push(key);
-              await this.setState({
-                m_formula: newFormula
-              });
+            } else {
+              newFormula[formulaLength - 1] = key;
             }
+            await this.setState({ m_formula: newFormula });
             break;
           case 3:
             await this.setState({

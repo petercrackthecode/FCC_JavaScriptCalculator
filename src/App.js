@@ -13,23 +13,26 @@ class App extends React.Component {
       m_formula: [],
       m_isDivisionByZero: false
     };
-    this.onChange= this.onChange.bind(this);
-    this.emptyFormula= this.emptyFormula.bind(this);
-    this.clearAll= this.clearAll.bind(this);
-    this.calculateResult= this.calculateResult.bind(this);
+    this.onChange = this.onChange.bind(this);
+    this.emptyFormula = this.emptyFormula.bind(this);
+    this.clearAll = this.clearAll.bind(this);
+    this.calculateResult = this.calculateResult.bind(this);
   }
 
   async emptyFormula() {
     await this.setState({ m_formula: [] });
-  };
+  }
 
   async clearAll() {
     await this.emptyFormula();
     await this.setState({ m_result: 0 });
-  };
+  }
 
   // you must check for division by zero here
   async calculateResult(firstNum, operator, secondNum) {
+    if (!firstNum) firstNum = 0;
+    if (!secondNum) secondNum = 0;
+
     let result = this.state.m_result;
 
     switch (operator) {
@@ -51,7 +54,7 @@ class App extends React.Component {
     }
 
     return result;
-  };
+  }
 
   // onChange= (key) => {
   //   console.log("onChange activates on " + key);
@@ -118,15 +121,24 @@ class App extends React.Component {
           case 0:
             await this.setState(prevState => ({
               m_formula: prevState.m_formula.concat(
-                prevState.m_result.toString(), key
+                prevState.m_result.toString(),
+                key
               )
             }));
             break;
           case 1:
-          case 2:
             let newFormula = this.state.m_formula;
             newFormula[1] = key;
             await this.setState({ m_formula: newFormula });
+            break;
+          case 2:
+            if (key === "+" || key === "-") {
+              let newFormula= this.state.m_formula;
+              newFormula.push(key);
+              await this.setState({
+                m_formula: newFormula
+              });
+            }
             break;
           case 3:
             await this.setState({
@@ -148,21 +160,20 @@ class App extends React.Component {
             break;
         }
         break;
-      case '.':
+      case ".":
         if (formulaLength === 0 || formulaLength === 2) {
-          let newFormula= this.state.m_formula.concat(key);
-          this.setState({m_formula: newFormula});
-        }
-        else {
-          let newReg= new RegExp('\\' + key, 'g');
+          let newFormula = this.state.m_formula.concat(key);
+          this.setState({ m_formula: newFormula });
+        } else {
+          let newReg = new RegExp("\\" + key, "g");
           if (!newReg.test(this.state.m_formula[formulaLength - 1])) {
-            console.log('-1 here');
-            let newFormula= this.state.m_formula;
-            newFormula[formulaLength - 1]+= key;
-            this.setState({m_formula: newFormula});
+            console.log("-1 here");
+            let newFormula = this.state.m_formula;
+            newFormula[formulaLength - 1] += key;
+            this.setState({ m_formula: newFormula });
           }
-      }
-      break;
+        }
+        break;
       case "AC":
         this.clearAll();
         break;
@@ -170,9 +181,8 @@ class App extends React.Component {
         break;
     }
 
-    // there must be something wrong here
     console.log("formula Length in App.js= " + this.state.m_formula.length);
-  };
+  }
 
   render() {
     return (

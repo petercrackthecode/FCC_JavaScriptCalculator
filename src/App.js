@@ -17,6 +17,7 @@ class App extends React.Component {
     this.emptyFormula = this.emptyFormula.bind(this);
     this.clearAll = this.clearAll.bind(this);
     this.calculateResult = this.calculateResult.bind(this);
+    this.toggleDivisionByZero= this.toggleDivisionByZero.bind(this);
   }
 
   async emptyFormula() {
@@ -26,6 +27,12 @@ class App extends React.Component {
   async clearAll() {
     await this.emptyFormula();
     await this.setState({ m_result: 0 });
+  }
+
+  async toggleDivisionByZero() {
+    if (this.state.m_isDivisionByZero) {
+      await this.setState({m_isDivisionByZero: false});
+    }
   }
 
   // you must check for division by zero here
@@ -56,13 +63,8 @@ class App extends React.Component {
     return result;
   }
 
-  // onChange= (key) => {
-  //   console.log("onChange activates on " + key);
-  //   this.setState({m_result: key});
-  //   console.log("state.m_result= " + this.state.m_result);
-  // }
-
   async onChange(key) {
+    await this.toggleDivisionByZero();
     const formulaLength = this.state.m_formula.length;
     const firstNum = this.state.m_formula[0];
     const operator = this.state.m_formula[1];

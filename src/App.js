@@ -148,7 +148,6 @@ class App extends React.Component {
             break;
         }
         break;
-      /*
       case '.':
         if (formulaLength === 0 || formulaLength === 2) {
           let newFormula= this.state.m_formula.concat(key);
@@ -158,7 +157,6 @@ class App extends React.Component {
 
         }
       break;
-      */
       case "AC":
         this.clearAll();
         break;

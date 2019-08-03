@@ -148,15 +148,17 @@ class App extends React.Component {
             break;
         }
         break;
+        /*
       case '.':
         if (formulaLength === 0 || formulaLength === 2) {
           let newFormula= this.state.m_formula.concat(key);
           this.setState({m_formula: newFormula});
         }
-        else if (this.state.m_formula[formulaLength].search) {
+        else if (this.state.m_formula[formulaLength-1].search) {
 
         }
       break;
+      */
       case "AC":
         this.clearAll();
         break;

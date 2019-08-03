@@ -24,7 +24,7 @@ class App extends React.Component {
   };
 
   async clearAll() {
-    this.emptyFormula();
+    await this.emptyFormula();
     await this.setState({ m_result: 0 });
   };
 
@@ -71,7 +71,7 @@ class App extends React.Component {
         switch (formulaLength) {
           case 3:
             await this.setState({
-              m_result: this.calculateResult(
+              m_result: await this.calculateResult(
                 Number(firstNum),
                 operator,
                 Number(secondNum)
@@ -130,7 +130,7 @@ class App extends React.Component {
             break;
           case 3:
             await this.setState({
-              m_result: this.calculateResult(
+              m_result: await this.calculateResult(
                 Number(firstNum),
                 operator,
                 Number(secondNum)

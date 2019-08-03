@@ -148,17 +148,21 @@ class App extends React.Component {
             break;
         }
         break;
-        /*
       case '.':
         if (formulaLength === 0 || formulaLength === 2) {
           let newFormula= this.state.m_formula.concat(key);
           this.setState({m_formula: newFormula});
         }
-        else if (this.state.m_formula[formulaLength-1].search) {
-
-        }
+        else {
+          let newReg= new RegExp(key, 'g');
+          if (!newReg.test(this.state.m_formula[formulaLength - 1])) {
+            console.log('-1 here');
+            let newFormula= this.state.m_formula;
+            newFormula[formulaLength - 1]+= key;
+            this.setState({m_formula: newFormula});
+          }
+      }
       break;
-      */
       case "AC":
         this.clearAll();
         break;

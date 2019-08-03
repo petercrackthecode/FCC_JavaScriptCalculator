@@ -154,7 +154,7 @@ class App extends React.Component {
           this.setState({m_formula: newFormula});
         }
         else {
-          let newReg= new RegExp(key, 'g');
+          let newReg= new RegExp('\\' + key, 'g');
           if (!newReg.test(this.state.m_formula[formulaLength - 1])) {
             console.log('-1 here');
             let newFormula= this.state.m_formula;

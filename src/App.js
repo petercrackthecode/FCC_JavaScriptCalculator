@@ -118,7 +118,7 @@ class App extends React.Component {
           case 0:
             await this.setState(prevState => ({
               m_formula: prevState.m_formula.concat(
-                prevState.m_result.toString()
+                prevState.m_result.toString(), key
               )
             }));
             break;

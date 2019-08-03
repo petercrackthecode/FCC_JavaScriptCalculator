@@ -13,19 +13,23 @@ class App extends React.Component {
       m_formula: [],
       m_isDivisionByZero: false
     };
+    this.onChange= this.onChange.bind(this);
+    this.emptyFormula= this.emptyFormula.bind(this);
+    this.clearAll= this.clearAll.bind(this);
+    this.calculateResult= this.calculateResult.bind(this);
   }
 
-  emptyFormula = () => {
-    this.setState({ m_formula: [] });
+  async emptyFormula() {
+    await this.setState({ m_formula: [] });
   };
 
-  clearAll = () => {
+  async clearAll() {
     this.emptyFormula();
-    this.setState({ m_result: 0 });
+    await this.setState({ m_result: 0 });
   };
 
   // you must check for division by zero here
-  calculateResult = (firstNum, operator, secondNum) => {
+  async calculateResult(firstNum, operator, secondNum) {
     let result = this.state.m_result;
 
     switch (operator) {
@@ -39,7 +43,7 @@ class App extends React.Component {
         result = firstNum * secondNum;
         break;
       case "/":
-        if (!secondNum) this.setState({ m_isDivisionByZero: true });
+        if (!secondNum) await this.setState({ m_isDivisionByZero: true });
         else result = firstNum / secondNum;
         break;
       default:
@@ -55,7 +59,7 @@ class App extends React.Component {
   //   console.log("state.m_result= " + this.state.m_result);
   // }
 
-  onChange = key => {
+  async onChange(key) {
     const formulaLength = this.state.m_formula.length;
     const firstNum = this.state.m_formula[0];
     const operator = this.state.m_formula[1];
@@ -66,7 +70,7 @@ class App extends React.Component {
       case "=":
         switch (formulaLength) {
           case 3:
-            this.setState({
+            await this.setState({
               m_result: this.calculateResult(
                 Number(firstNum),
                 operator,
@@ -76,7 +80,7 @@ class App extends React.Component {
             break;
           case 2:
           case 1:
-            this.setState({ m_result: Number(firstNum) });
+            await this.setState({ m_result: Number(firstNum) });
             break;
           case 0:
           default:
@@ -96,14 +100,14 @@ class App extends React.Component {
       case "9":
         if (formulaLength === 0 || formulaLength === 2) {
           if (!(key === "0" && !this.state.m_formula[formulaLength - 1]))
-            this.setState(prevState => ({
+            await this.setState(prevState => ({
               m_formula: prevState.m_formula.concat(key)
             }));
         } // formulaLength= 1 || 3
         else {
           let newFormula = this.state.m_formula;
           newFormula[formulaLength - 1] += key;
-          this.setState({ m_formula: newFormula });
+          await this.setState({ m_formula: newFormula });
         }
         break;
       case "+":
@@ -112,7 +116,7 @@ class App extends React.Component {
       case "/":
         switch (formulaLength) {
           case 0:
-            this.setState(prevState => ({
+            await this.setState(prevState => ({
               m_formula: prevState.m_formula.concat(
                 prevState.m_result.toString()
               )
@@ -122,10 +126,10 @@ class App extends React.Component {
           case 2:
             let newFormula = this.state.m_formula;
             newFormula[1] = key;
-            this.setState({ m_formula: newFormula });
+            await this.setState({ m_formula: newFormula });
             break;
           case 3:
-            this.setState({
+            await this.setState({
               m_result: this.calculateResult(
                 Number(firstNum),
                 operator,
@@ -133,7 +137,7 @@ class App extends React.Component {
               )
             });
             this.emptyFormula();
-            this.setState(prevState => ({
+            await this.setState(prevState => ({
               m_formula: prevState.m_formula.concat(
                 prevState.m_result.toString(),
                 key
